@@ -22,15 +22,18 @@ pr:
     include:
     - sdk/batch/
 
-stages:
-- template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-ci.yml
   parameters:
-    ServiceDirectory: batch
-    ArtifactName: packages
-    Artifacts:
-    - name: Microsoft.Azure.Batch
-      safeName: MicrosoftAzureBatch
-    - name: Microsoft.Azure.Batch.FileStaging
-      safeName: MicrosoftAzureBatchFileStaging
-    - name: Microsoft.Azure.Batch.Conventions.Files
-      safeName: MicrosoftAzureBatchConventionsFiles
+    Stages:
+      - template: stages/archetype-sdk-client.yml
+        parameters:
+          ServiceDirectory: batch
+          ArtifactName: packages
+          Artifacts:
+          - name: Microsoft.Azure.Batch
+            safeName: MicrosoftAzureBatch
+          - name: Microsoft.Azure.Batch.FileStaging
+            safeName: MicrosoftAzureBatchFileStaging
+          - name: Microsoft.Azure.Batch.Conventions.Files
+            safeName: MicrosoftAzureBatchConventionsFiles

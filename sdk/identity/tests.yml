@@ -1,10 +1,13 @@
 trigger: none
 
-jobs:
-- template: ../../eng/pipelines/templates/jobs/archetype-sdk-tests.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-tests.yml
   parameters:
-    ServiceDirectory: identity
-    EnvVars:
-      AZURE_IDENTITY_TEST_TENANTID: $(net-identity-tenantid)
-      AZURE_IDENTITY_TEST_USERNAME: $(net-identity-username)
-      AZURE_IDENTITY_TEST_PASSWORD: $(net-identity-password)
+    Jobs:
+    - template: jobs/archetype-sdk-tests.yml
+      parameters:
+        ServiceDirectory: identity
+        EnvVars:
+          AZURE_IDENTITY_TEST_TENANTID: $(net-identity-tenantid)
+          AZURE_IDENTITY_TEST_USERNAME: $(net-identity-username)
+          AZURE_IDENTITY_TEST_PASSWORD: $(net-identity-password)

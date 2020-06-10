@@ -1,9 +1,12 @@
 trigger: none
 
-jobs:
-- template: ../../eng/pipelines/templates/jobs/archetype-sdk-tests.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-tests.yml
   parameters:
-    ServiceDirectory: search
-    MaxParallel: 2
-    EnvVars:
-      AZURE_SEARCH_TEST_MODE: Live
+    Jobs:
+    - template: jobs/archetype-sdk-tests.yml
+      parameters:
+        ServiceDirectory: search
+        MaxParallel: 2
+        EnvVars:
+          AZURE_SEARCH_TEST_MODE: Live

@@ -22,21 +22,24 @@ pr:
     include:
     - sdk/eventhub/
 
-stages:
-- template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-ci.yml
   parameters:
-    ServiceDirectory: eventhub
-    ArtifactName: packages
-    Artifacts:
-    - name: Azure.Messaging.EventHubs
-      safeName: AzureMessagingEventHubs
-    - name: Azure.Messaging.EventHubs.Processor
-      safeName: AzureMessagingEventHubsProcessor
-    - name: Microsoft.Azure.EventHubs
-      safeName: MicrosoftAzureEventHubs
-    - name: Microsoft.Azure.EventHubs.Processor
-      safeName: MicrosoftAzureEventHubsProcessor
-    - name: Microsoft.Azure.EventHubs.ServiceFabricProcessor
-      safeName: MicrosoftAzureEventHubsServiceFabricProcessor
-    - name: Azure.ResourceManager.EventHubs
-      safeName: AzureResourceManagerEventHubs
+    Stages:
+      - template: stages/archetype-sdk-client.yml
+        parameters:
+          ServiceDirectory: eventhub
+          ArtifactName: packages
+          Artifacts:
+          - name: Azure.Messaging.EventHubs
+            safeName: AzureMessagingEventHubs
+          - name: Azure.Messaging.EventHubs.Processor
+            safeName: AzureMessagingEventHubsProcessor
+          - name: Microsoft.Azure.EventHubs
+            safeName: MicrosoftAzureEventHubs
+          - name: Microsoft.Azure.EventHubs.Processor
+            safeName: MicrosoftAzureEventHubsProcessor
+          - name: Microsoft.Azure.EventHubs.ServiceFabricProcessor
+            safeName: MicrosoftAzureEventHubsServiceFabricProcessor
+          - name: Azure.ResourceManager.EventHubs
+            safeName: AzureResourceManagerEventHubs

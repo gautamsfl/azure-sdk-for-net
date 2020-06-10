@@ -22,23 +22,26 @@ pr:
     include:
     - sdk/storage/
 
-stages:
-- template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-ci.yml
   parameters:
-    ServiceDirectory: storage
-    ArtifactName: packages
-    Artifacts:
-    - name: Azure.Storage.Blobs
-      safeName: AzureStorageBlobs
-    - name: Azure.Storage.Blobs.Batch
-      safeName: AzureStorageBlobsBatch
-    - name: Azure.Storage.Common
-      safeName: AzureStorageCommon
-    - name: Azure.Storage.Files.Shares
-      safeName: AzureStorageFilesShares
-    - name: Azure.Storage.Files.DataLake
-      safeName: AzureStorageFilesDataLake
-    - name: Azure.Storage.Queues
-      safeName: AzureStorageQueues
-    - name: Azure.ResourceManager.Storage
-      safeName: AzureResourceManagerStorage
+    Stages:
+      - template: stages/archetype-sdk-client.yml
+        parameters:
+          ServiceDirectory: storage
+          ArtifactName: packages
+          Artifacts:
+          - name: Azure.Storage.Blobs
+            safeName: AzureStorageBlobs
+          - name: Azure.Storage.Blobs.Batch
+            safeName: AzureStorageBlobsBatch
+          - name: Azure.Storage.Common
+            safeName: AzureStorageCommon
+          - name: Azure.Storage.Files.Shares
+            safeName: AzureStorageFilesShares
+          - name: Azure.Storage.Files.DataLake
+            safeName: AzureStorageFilesDataLake
+          - name: Azure.Storage.Queues
+            safeName: AzureStorageQueues
+          - name: Azure.ResourceManager.Storage
+            safeName: AzureResourceManagerStorage

@@ -22,11 +22,14 @@ pr:
     include:
     - sdk/eventgrid/
 
-stages:
-- template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-ci.yml
   parameters:
-    ServiceDirectory: eventgrid
-    ArtifactName: packages
-    Artifacts:
-    - name: Microsoft.Azure.EventGrid
-      safeName: MicrosoftAzureEventGrid
+    Stages:
+      - template: stages/archetype-sdk-client.yml
+        parameters:
+          ServiceDirectory: eventgrid
+          ArtifactName: packages
+          Artifacts:
+          - name: Microsoft.Azure.EventGrid
+            safeName: MicrosoftAzureEventGrid

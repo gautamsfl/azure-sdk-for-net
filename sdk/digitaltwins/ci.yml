@@ -22,11 +22,14 @@ pr:
     include:
     - sdk/digitaltwins/
 
-stages:
-- template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-ci.yml
   parameters:
-    ServiceDirectory: digitaltwins
-    ArtifactName: packages
-    Artifacts:
-    - name: Azure.DigitalTwins.Core
-      safeName: AzureDigitalTwinsCore
+    Stages:
+      - template: stages/archetype-sdk-client.yml
+        parameters:
+          ServiceDirectory: digitaltwins
+          ArtifactName: packages
+          Artifacts:
+          - name: Azure.DigitalTwins.Core
+            safeName: AzureDigitalTwinsCore

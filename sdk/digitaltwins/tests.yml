@@ -1,11 +1,14 @@
 trigger: none
 
-jobs:
-- template: ../../eng/pipelines/templates/jobs/archetype-sdk-tests.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-tests.yml
   parameters:
-    ServiceDirectory: digitaltwins
-    Location: westus2
-    SubscriptionConfiguration: $(sub-config-azure-cloud-test-resources-preview)
-    EnvVars:
-      # Runs live tests.
-      AZURE_IOT_TEST_MODE: Live
+    Jobs:
+    - template: jobs/archetype-sdk-tests.yml
+      parameters:
+        ServiceDirectory: digitaltwins
+        Location: westus2
+        SubscriptionConfiguration: $(sub-config-azure-cloud-test-resources-preview)
+        EnvVars:
+          # Runs live tests.
+          AZURE_IOT_TEST_MODE: Live

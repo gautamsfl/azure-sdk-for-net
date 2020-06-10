@@ -22,11 +22,14 @@ pr:
     include:
     - sdk/graphrbac/
 
-stages:
-- template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-ci.yml
   parameters:
-    ServiceDirectory: graphrbac
-    ArtifactName: packages
-    Artifacts:
-    - name: Microsoft.Azure.Graph.RBAC
-      safeName: MicrosoftAzureGraphRBAC
+    Stages:
+      - template: stages/archetype-sdk-client.yml
+        parameters:
+          ServiceDirectory: graphrbac
+          ArtifactName: packages
+          Artifacts:
+          - name: Microsoft.Azure.Graph.RBAC
+            safeName: MicrosoftAzureGraphRBAC

@@ -22,17 +22,20 @@ pr:
     include:
     - sdk/keyvault/
 
-stages:
-- template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-ci.yml
   parameters:
-    ServiceDirectory: keyvault
-    ArtifactName: packages
-    Artifacts:
-    - name: Azure.Security.KeyVault.Certificates
-      safeName: AzureSecurityKeyVaultCertificates
-    - name: Azure.Security.KeyVault.Keys
-      safeName: AzureSecurityKeyVaultKeys
-    - name: Azure.Security.KeyVault.Secrets
-      safeName: AzureSecurityKeyVaultSecrets
-    - name: Azure.ResourceManager.KeyVault
-      safeName: AzureResourceManagerKeyVault
+    Stages:
+      - template: stages/archetype-sdk-client.yml
+        parameters:
+          ServiceDirectory: keyvault
+          ArtifactName: packages
+          Artifacts:
+          - name: Azure.Security.KeyVault.Certificates
+            safeName: AzureSecurityKeyVaultCertificates
+          - name: Azure.Security.KeyVault.Keys
+            safeName: AzureSecurityKeyVaultKeys
+          - name: Azure.Security.KeyVault.Secrets
+            safeName: AzureSecurityKeyVaultSecrets
+          - name: Azure.ResourceManager.KeyVault
+            safeName: AzureResourceManagerKeyVault

@@ -1,10 +1,12 @@
 trigger: none
 
-jobs:
-- template: ../../eng/pipelines/templates/jobs/archetype-sdk-tests.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-tests.yml
   parameters:
-    ServiceDirectory: keyvault
-    TimeoutInMinutes: 120
-    EnvVars:
-      # Runs samples with live tests.
-      AZURE_KEYVAULT_TEST_MODE: Live
+    Jobs:
+    - template: jobs/archetype-sdk-tests.yml
+      parameters:
+        ServiceDirectory: keyvault
+        EnvVars:
+          # Runs samples with live tests.
+          AZURE_KEYVAULT_TEST_MODE: Live

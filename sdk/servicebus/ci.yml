@@ -22,13 +22,16 @@ pr:
     include:
     - sdk/servicebus/
 
-stages:
-- template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-ci.yml
   parameters:
-    ServiceDirectory: servicebus
-    ArtifactName: packages
-    Artifacts:
-    - name: Azure.Messaging.ServiceBus
-      safeName: AzureMessagingServiceBus
-    - name: Microsoft.Azure.ServiceBus
-      safeName: MicrosoftAzureServiceBus
+    Stages:
+      - template: stages/archetype-sdk-client.yml
+        parameters:
+          ServiceDirectory: servicebus
+          ArtifactName: packages
+          Artifacts:
+          - name: Azure.Messaging.ServiceBus
+            safeName: AzureMessagingServiceBus
+          - name: Microsoft.Azure.ServiceBus
+            safeName: MicrosoftAzureServiceBus

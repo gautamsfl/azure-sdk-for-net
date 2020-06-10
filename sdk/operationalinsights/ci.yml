@@ -22,11 +22,14 @@ pr:
     include:
     - sdk/operationalinsights/
 
-stages:
-- template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-ci.yml
   parameters:
-    ServiceDirectory: operationalinsights
-    ArtifactName: packages
-    Artifacts:
-    - name: Microsoft.Azure.OperationalInsights
-      safeName: MicrosoftAzureOperationalInsights
+    Stages:
+      - template: stages/archetype-sdk-client.yml
+        parameters:
+          ServiceDirectory: operationalinsights
+          ArtifactName: packages
+          Artifacts:
+          - name: Microsoft.Azure.OperationalInsights
+            safeName: MicrosoftAzureOperationalInsights

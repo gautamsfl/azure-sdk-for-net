@@ -23,15 +23,18 @@ pr:
     include:
     - sdk/synapse/
 
-stages:
-- template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+extends:
+  template: ../../eng/pipelines/templates/archetype-ci.yml
   parameters:
-    ServiceDirectory: synapse
-    ArtifactName: packages
-    Artifacts:
-    - name: Azure.Analytics.Synapse.Spark
-      safeName: AzureAnalyticsSynapseSpark
-    - name: Azure.Analytics.Synapse.AccessControl
-      safeName: AzureAnalyticsSynapseAccessControl
-    - name: Azure.Analytics.Synapse.Artifacts
-      safeName: AzureAnalyticsSynapseArtifacts
+    Stages:
+      - template: stages/archetype-sdk-client.yml
+        parameters:
+          ServiceDirectory: synapse
+          ArtifactName: packages
+          Artifacts:
+          - name: Azure.Analytics.Synapse.Spark
+            safeName: AzureAnalyticsSynapseSpark
+          - name: Azure.Analytics.Synapse.AccessControl
+            safeName: AzureAnalyticsSynapseAccessControl
+          - name: Azure.Analytics.Synapse.Artifacts
+            safeName: AzureAnalyticsSynapseArtifacts

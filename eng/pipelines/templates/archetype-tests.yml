@@ -1,0 +1,14 @@
+resources:
+  repositories:
+    - repository: azure-sdk-tools
+      type: github
+      name: azure/azure-sdk-tools
+      endpoint: azure
+
+parameters:
+- name: Jobs
+  type: object
+  default: []
+
+jobs: 
+- ${{ parameters.Jobs }}
