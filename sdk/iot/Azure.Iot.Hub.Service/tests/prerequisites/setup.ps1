@@ -90,6 +90,7 @@ if (-not $hubExists)
     az iot hub create -n $IotHubName -g $ResourceGroup --location $Region --output none --only-show-errors
 }
 $iotHubHostName = az iot hub show -n $IotHubName -g $ResourceGroup --query 'properties.hostName' --output tsv --only-show-errors
+$iotHubConnectionString = az iot hub show-connection-string -n $IotHubName -g $ResourceGroup --query 'connectionString' --output tsv --only-show-errors
 
 Write-Host("Set a new client secret for $appId`n")
 $appSecret = az ad app credential reset --id $appId --years 2 --query 'password' --output tsv
@@ -100,7 +101,8 @@ Write-Host("Writing user config file - $fileName`n")
 $appSecretJsonEscaped = ConvertTo-Json $appSecret
 $config = @"
 {
-    "IotHubHostName": "https://$($iotHubHostName)",
+    "IotHubHostName": "$iotHubHostName",
+    "IotHubConnectionString": "$iotHubConnectionString",
     "ApplicationId": "$appId",
     "ClientSecret": $appSecretJsonEscaped,
     "TestMode":  "Live"
