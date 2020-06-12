@@ -50,8 +50,10 @@ namespace Azure.Iot.Hub.Service
     public partial class IoTHubServiceClient
     {
         protected IoTHubServiceClient() { }
-        public IoTHubServiceClient(System.Uri endpoint) { }
-        public IoTHubServiceClient(System.Uri endpoint, Azure.Iot.Hub.Service.IoTHubServiceClientOptions options) { }
+        public IoTHubServiceClient(string connectionString) { }
+        public IoTHubServiceClient(string connectionString, Azure.Iot.Hub.Service.IoTHubServiceClientOptions options) { }
+        public IoTHubServiceClient(System.Uri endpoint, Azure.Core.TokenCredential credential) { }
+        public IoTHubServiceClient(System.Uri endpoint, Azure.Core.TokenCredential credential, Azure.Iot.Hub.Service.IoTHubServiceClientOptions options) { }
         public Azure.Iot.Hub.Service.DevicesClient Devices { get { throw null; } }
         public Azure.Iot.Hub.Service.FilesClient Files { get { throw null; } }
         public Azure.Iot.Hub.Service.JobsClient Jobs { get { throw null; } }
@@ -95,6 +97,23 @@ namespace Azure.Iot.Hub.Service
     public partial class StatisticsClient
     {
         public StatisticsClient() { }
+    }
+}
+namespace Azure.Iot.Hub.Service.Authentication
+{
+    public partial interface ISasTokenProvider
+    {
+        string GetSasToken();
+    }
+    public partial class SasTokenProviderWithSharedAccessKey : Azure.Iot.Hub.Service.Authentication.ISasTokenProvider
+    {
+        public SasTokenProviderWithSharedAccessKey(string hostname, string sharedAccessPolicy, string sharedAccessKey, System.TimeSpan? timeToLive = default(System.TimeSpan?)) { }
+        public string GetSasToken() { throw null; }
+    }
+    public partial class StaticSasTokenProvider : Azure.Iot.Hub.Service.Authentication.ISasTokenProvider
+    {
+        public StaticSasTokenProvider(string sharedAccessSignature) { }
+        public string GetSasToken() { throw null; }
     }
 }
 namespace Azure.Iot.Hub.Service.Models
