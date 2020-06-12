@@ -99,23 +99,6 @@ namespace Azure.Iot.Hub.Service
         public StatisticsClient() { }
     }
 }
-namespace Azure.Iot.Hub.Service.Authentication
-{
-    public partial interface ISasTokenProvider
-    {
-        string GetSasToken();
-    }
-    public partial class SasTokenProviderWithSharedAccessKey : Azure.Iot.Hub.Service.Authentication.ISasTokenProvider
-    {
-        public SasTokenProviderWithSharedAccessKey(string hostname, string sharedAccessPolicy, string sharedAccessKey, System.TimeSpan? timeToLive = default(System.TimeSpan?)) { }
-        public string GetSasToken() { throw null; }
-    }
-    public partial class StaticSasTokenProvider : Azure.Iot.Hub.Service.Authentication.ISasTokenProvider
-    {
-        public StaticSasTokenProvider(string sharedAccessSignature) { }
-        public string GetSasToken() { throw null; }
-    }
-}
 namespace Azure.Iot.Hub.Service.Models
 {
     public partial class AuthenticationMechanism
