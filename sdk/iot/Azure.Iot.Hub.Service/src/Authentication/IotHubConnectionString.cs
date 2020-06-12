@@ -6,6 +6,9 @@ using Azure.Core;
 
 namespace Azure.Iot.Hub.Service.Authentication
 {
+    /// <summary>
+    /// Implementation for creating the shared access signature token provider.
+    /// </summary>
     internal class IotHubConnectionString
     {
         public const string HostNameIdentifier = "HostName";

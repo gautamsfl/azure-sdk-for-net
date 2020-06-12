@@ -8,6 +8,10 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Iot.Hub.Service.Authentication
 {
+    /// <summary>
+    /// The shared access signature based HTTP pipeline policy.
+    /// This authentication policy injects the sas token into the HTTP authentication header for each HTTP request made.
+    /// </summary>
     internal class SasTokenAuthenticationPolicy : HttpPipelinePolicy
     {
         private readonly ISasTokenProvider _sasTokenProvider;

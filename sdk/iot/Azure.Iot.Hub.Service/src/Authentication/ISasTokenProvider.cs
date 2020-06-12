@@ -6,7 +6,7 @@ namespace Azure.Iot.Hub.Service.Authentication
     /// <summary>
     /// The token provider interface for shared access signature based authentication.
     /// </summary>
-    public interface ISasTokenProvider
+    internal interface ISasTokenProvider
     {
         /// <summary>
         /// Retrieve the shared access signature to be used.

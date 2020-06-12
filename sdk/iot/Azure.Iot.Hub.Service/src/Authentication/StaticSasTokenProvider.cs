@@ -3,7 +3,10 @@
 
 namespace Azure.Iot.Hub.Service.Authentication
 {
-    public class StaticSasTokenProvider : ISasTokenProvider
+    /// <summary>
+    /// Implementation of a shared access signature provider with a static sas token.
+    /// </summary>
+    internal class StaticSasTokenProvider : ISasTokenProvider
     {
         private readonly string _sharedAccessSignature;
 

@@ -10,6 +10,9 @@ using System.Text;
 
 namespace Azure.Iot.Hub.Service.Authentication
 {
+    /// <summary>
+    /// Builds the shared access signature based on the access policy passed.
+    /// </summary>
     internal sealed class SharedAccessSignatureBuilder
     {
         public SharedAccessSignatureBuilder()
@@ -56,7 +59,7 @@ namespace Azure.Iot.Hub.Service.Authentication
                 SharedAccessSignatureConstants.SignatureFieldName, WebUtility.UrlEncode(signature),
                 SharedAccessSignatureConstants.ExpiryFieldName, WebUtility.UrlEncode(expiresOn));
 
-            if (!string.IsNullOrEmpty(keyName))
+            if (!string.IsNullOrWhiteSpace(keyName))
             {
                 buffer.AppendFormat(CultureInfo.InvariantCulture, "&{0}={1}",
                     SharedAccessSignatureConstants.KeyNameFieldName, WebUtility.UrlEncode(keyName));

@@ -87,7 +87,7 @@ namespace Azure.Iot.Hub.Service
             var iotHubConnectionString = new IotHubConnectionString(connectionString);
             ISasTokenProvider sasProvider = iotHubConnectionString.GetSasTokenProvider();
 
-            _endpoint = new UriBuilder { Scheme = "https", Host = iotHubConnectionString.HostName, }.Uri;
+            _endpoint = buildEndpointUriFromHostname(iotHubConnectionString.HostName);
 
             _clientDiagnostics = new ClientDiagnostics(options);
 
@@ -168,6 +168,11 @@ namespace Azure.Iot.Hub.Service
 
             // TODO: GetAuthorizationScopes for IoT Hub
             return null;
+        }
+
+        private static Uri buildEndpointUriFromHostname(string hostname)
+        {
+            return new UriBuilder { Scheme = "https", Host = hostname }.Uri;
         }
     }
 }

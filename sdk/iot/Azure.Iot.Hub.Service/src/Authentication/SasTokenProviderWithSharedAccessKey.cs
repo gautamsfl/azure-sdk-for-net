@@ -5,7 +5,10 @@ using System;
 
 namespace Azure.Iot.Hub.Service.Authentication
 {
-    public class SasTokenProviderWithSharedAccessKey : ISasTokenProvider
+    /// <summary>
+    /// Implementation of a shared access signature provider with token caching and refresh.
+    /// </summary>
+    internal class SasTokenProviderWithSharedAccessKey : ISasTokenProvider
     {
         private static readonly TimeSpan s_defaultTimeToLive = TimeSpan.FromMinutes(30);
         private readonly object _lock = new object();
@@ -28,7 +31,7 @@ namespace Azure.Iot.Hub.Service.Authentication
             _hostname = hostname;
             _sharedAccessPolicy = sharedAccessPolicy;
             _sharedAccessKey = sharedAccessKey;
-            _timeToLive = (TimeSpan)(timeToLive == null ? s_defaultTimeToLive : timeToLive);
+            _timeToLive = timeToLive ?? s_defaultTimeToLive;
 
             _cachedSasToken = null;
         }
@@ -57,8 +60,8 @@ namespace Azure.Iot.Hub.Service.Authentication
 
         private bool IsTokenExpired()
         {
-            // There is no valid sas token available at SasTokenProviderWithSharedAccessKey initialization,
-            // and when current time is greater than or equal to the token expiry time.
+            // The token is considered expired if this is the first time it is being accessed (not cached yet)
+            // or the current time is greater than or equal to the token expiry time.
             return _cachedSasToken == null || DateTimeOffset.UtcNow.CompareTo(_tokenExpiryTime) >= 0;
         }
     }
